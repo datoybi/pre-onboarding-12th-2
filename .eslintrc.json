@@ -5,7 +5,6 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "airbnb",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
@@ -17,12 +16,15 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "plugins": ["react", "react-hooks", "import", "@typescript-eslint"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "prettier/prettier": "error",
+    "import/prefer-default-export": "off",
+
     "react/jsx-filename-extension": [
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
