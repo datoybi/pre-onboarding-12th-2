@@ -15,7 +15,7 @@ const Wrapper = styled.header`
   margin-bottom: 50px;
 
   & > h1 {
-    font-weight: normal;
+    font-size: 2rem;
     text-align: center;
   }
 `;
