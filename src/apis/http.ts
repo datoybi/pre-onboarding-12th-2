@@ -7,6 +7,7 @@ const axios = Axios.create({
   headers: {
     Accept: 'application/vnd.github+json',
     'X-Github-Api-Version': '2022-11-28',
+    Authorization: `token ${process.env.REACT_APP_GIT_TOKEN}`,
   },
 });
 
