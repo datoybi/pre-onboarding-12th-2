@@ -4,14 +4,22 @@ import { styled } from 'styled-components';
 
 export default function IssueTitle(props: any) {
   const { type = 'list', children, ...rest } = props;
+  const formatDate = () => {
+    const dateObj = new Date(props.date);
+    return `${dateObj.getFullYear()}월 ${dateObj.getMonth()}월 ${dateObj.getDate()}일`;
+  };
 
   return (
     <Wrapper type={type}>
       <div>
-        <Title>#111 issue title</Title>
-        <SubTitle>작성자: name, 작성일: 2019년 12월 31일</SubTitle>
+        <Title>
+          #{props.issueNumber} {props.title}
+        </Title>
+        <SubTitle>
+          작성자: {props.author}, 작성일: {formatDate()}
+        </SubTitle>
       </div>
-      <Comment>코멘트: 67</Comment>
+      <Comment>코멘트: {props.comments}</Comment>
     </Wrapper>
   );
 }
@@ -31,16 +39,23 @@ const Wrapper = styled.div<{ type: string }>`
   & > img {
     margin: 0 auto;
   }
+
+  & > div {
+    width: 75%;
+  }
 `;
 
 const Comment = styled.p`
   display: flex;
   align-items: center;
   padding: 10px;
+  font-size: 0.85rem;
+  width: 25%;
 `;
 
 const Title = styled.p`
   padding: 5px 10px;
+  line-height: 20px;
 `;
 
 const SubTitle = styled.p`
