@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import IssueTitle from '../components/IssueTitle';
 import { getIssues } from '../apis/remotes';
+import { useNavigate } from 'react-router-dom';
 
 export default function IssueListPage() {
+  const navigate = useNavigate();
   const [issues, setIssues] = useState([]);
 
   useEffect(() => {
@@ -12,17 +14,19 @@ export default function IssueListPage() {
     fetchIssues();
   }, []);
 
+  const handleClickItem = (issueNumber: number) => {
+    navigate(`/issue/${issueNumber}`);
+  };
+
   console.log(issues);
   const issueElements = issues.map(
-    ({ id, number, body, comments, title, user, updated_at }: any) => (
-      <li key={id}>
+    ({ id, number, comments, title, user, updated_at }: any) => (
+      <li key={id} onClick={() => handleClickItem(number)}>
         <IssueTitle
           issueId={id}
           issueNumber={number}
-          content={body}
           comments={comments}
           title={title}
-          userUrl={user.avatar_url}
           date={updated_at}
           author={user.login}
         />

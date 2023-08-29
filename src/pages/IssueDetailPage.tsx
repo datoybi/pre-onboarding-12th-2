@@ -1,12 +1,37 @@
+import { useState, useEffect } from 'react';
 import { styled } from 'styled-components';
 import IssueTitle from '../components/IssueTitle';
+import { useParams } from 'react-router-dom';
+import { getIssue } from '../apis/remotes';
 
 export default function IssueDetail() {
+  const [issue, setIssue] = useState({}) as any;
+  const { id: issueId }: any = useParams();
+  console.log(issue);
+
+  useEffect(() => {
+    const fetchIssue = async () => {
+      setIssue(await getIssue(issueId));
+    };
+    fetchIssue();
+  }, [issueId]);
+
+  console.log(issue?.body);
+
   return (
     <>
       <Title>
-        <img src="http://via.placeholder.com/50x50" alt="" />
-        <IssueTitle type="detail" />
+        <img src={issue?.user?.avatar_url} alt={issue.title} />
+        <IssueTitle
+          type="detail"
+          issueId={issue?.id}
+          issueNumber={issue?.number}
+          content={issue?.body}
+          comments={issue?.comments}
+          title={issue?.title}
+          date={issue?.updated_at}
+          author={issue?.user?.login}
+        />
       </Title>
       <Content />
     </>

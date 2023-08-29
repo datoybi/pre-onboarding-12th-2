@@ -8,7 +8,6 @@ export default function IssueTitle(props: any) {
     const dateObj = new Date(props.date);
     return `${dateObj.getFullYear()}월 ${dateObj.getMonth()}월 ${dateObj.getDate()}일`;
   };
-
   return (
     <Wrapper type={type}>
       <div>
