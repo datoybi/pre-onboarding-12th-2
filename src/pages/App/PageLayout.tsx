@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
+import Header from '../../components/Header';
+import Container from '../../components/Container';
 
 export function PageLayout({ children }: { children: ReactNode }) {
   return (
-    <div>
-      {children}
-      {/* <Header />
-      <Container>{children}</Container> */}
-    </div>
+    <Container>
+      <Header />
+      <Container>{children}</Container>
+    </Container>
   );
 }
