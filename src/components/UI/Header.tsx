@@ -1,9 +1,11 @@
 import { styled } from 'styled-components';
-
+import { ORGANIZATION, REPO } from '../../utils/constants';
 export default function Header() {
   return (
     <Wrapper>
-      <h1>Angular/Angular-cli</h1>
+      <h1>
+        {ORGANIZATION}/{REPO}
+      </h1>
     </Wrapper>
   );
 }

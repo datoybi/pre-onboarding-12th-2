@@ -1,6 +1,7 @@
 import Axios, { AxiosRequestConfig } from 'axios';
+import { ORGANIZATION, REPO } from '../utils/constants';
 
-const baseURL = `https://api.github.com/repos/facebook/react`;
+const baseURL = `https://api.github.com/repos/${ORGANIZATION}/${REPO}`;
 
 const axios = Axios.create({
   baseURL,

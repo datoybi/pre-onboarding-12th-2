@@ -4,7 +4,6 @@ import IssueDetailPage from '../Issue/IssueDetailPage';
 import NotFoundPage from './404';
 
 export const Routes = () => {
-  // TODO: ROUTER명 바꾸기 /issues , /issue/:id
   return (
     <ReactRouterRoutes>
       <Route path="/" element={<IssueListPage />} />

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { styled } from 'styled-components';
-import IssueInfo from '../../components/IssueInfo';
+import IssueInfo from '../../components/Issue/IssueInfo';
 import { useParams } from 'react-router-dom';
 import { getIssue } from '../../apis/remotes';
-import IssueContent from '../../components/IssueContent';
+import IssueContent from '../../components/Issue/IssueContent';
 import { Issue } from '../../types/Issue';
-import Loading from '../../components/Loading';
+import Loading from '../../components/UI/Loading';
 
 export default function IssueDetail() {
   const [issue, setIssue] = useState<Issue>();
