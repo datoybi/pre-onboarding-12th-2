@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import IssueTitle from '../components/IssueTitle';
 import { useParams } from 'react-router-dom';
 import { getIssue } from '../apis/remotes';
+import IssueContent from '../components/IssueContent';
 
 export default function IssueDetail() {
   const [issue, setIssue] = useState({}) as any;
@@ -33,7 +34,7 @@ export default function IssueDetail() {
           author={issue?.user?.login}
         />
       </Title>
-      <Content />
+      <IssueContent content={issue?.body} />
     </>
   );
 }
@@ -50,8 +51,4 @@ const Title = styled.h2`
     height: 50px;
     width: 50px;
   }
-`;
-
-const Content = styled.div`
-  height: 500px;
 `;
