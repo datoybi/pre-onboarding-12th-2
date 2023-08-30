@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 // import { ReactNode } from 'react';
 // TODO: type:  list, detail
 
-export default function IssueTitle(props: any) {
+export default function IssueInfo(props: any) {
   const { type = 'list', children, ...rest } = props;
   const formatDate = () => {
     const dateObj = new Date(props.date);

@@ -1,6 +1,6 @@
 import { Route, Routes as ReactRouterRoutes } from 'react-router-dom';
-import IssueListPage from '../IssueListPage';
-import IssueDetailPage from '../IssueDetailPage';
+import IssueListPage from '../Issue/IssueListPage';
+import IssueDetailPage from '../Issue/IssueDetailPage';
 
 export const Routes = () => {
   // TODO: ROUTER명 바꾸기 /issues , /issue/:id
