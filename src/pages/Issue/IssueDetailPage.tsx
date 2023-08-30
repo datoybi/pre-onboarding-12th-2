@@ -5,37 +5,46 @@ import { useParams } from 'react-router-dom';
 import { getIssue } from '../../apis/remotes';
 import IssueContent from '../../components/IssueContent';
 import { Issue } from '../../types/Issue';
+import Loading from '../../components/Loading';
 
 export default function IssueDetail() {
   const [issue, setIssue] = useState<Issue>();
   const { id: issueId } = useParams() as { id: string };
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchIssue = async () => {
       setIssue(await getIssue(issueId));
+      setIsLoading(false);
     };
     fetchIssue();
   }, [issueId]);
 
   return (
     <>
-      <Title>
-        <img src={issue?.user?.avatar_url} alt={issue?.title} />
-        <IssueInfo
-          type="detail"
-          issueNumber={issue?.number}
-          comments={issue?.comments}
-          title={issue?.title}
-          date={issue?.updated_at}
-          author={issue?.user?.login}
-        />
-      </Title>
-      <IssueContent content={issue?.body || ''} />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <IssueTitle>
+            <img src={issue?.user?.avatar_url} alt={issue?.title} />
+            <IssueInfo
+              type="detail"
+              issueNumber={issue?.number}
+              comments={issue?.comments}
+              title={issue?.title}
+              date={issue?.updated_at}
+              author={issue?.user?.login}
+            />
+          </IssueTitle>
+          <IssueContent content={issue?.body || ''} />
+        </>
+      )}
     </>
   );
 }
 
-const Title = styled.h2`
+const IssueTitle = styled.h2`
   display: flex;
   justify-content: space-between;
   padding: 15px;

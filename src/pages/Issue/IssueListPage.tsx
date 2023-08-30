@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import useInfinityScroll from '../../hooks/useInfinityScroll';
 import { IssueContext } from '../../contexts/IssueContext';
 import { styled } from 'styled-components';
+import Loading from '../../components/Loading';
 
 export default function IssueListPage() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export default function IssueListPage() {
   return (
     <ul>
       {issueElements}
-      {isLoading && <>loading...</>}
+      {isLoading && <Loading />}
       {isError ? <>error</> : <ObserveRef ref={observeRef} />}
     </ul>
   );
