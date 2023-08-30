@@ -1,6 +1,6 @@
 # 프리온보딩 2주차 개인 과제 - 윤다솜
 
-목표특정 깃헙 레파지토리(https://github.com/facebook/react/issues)의 이슈 목록과 상세 내용을 확인하는 웹 사이트 구축하기
+특정 깃헙 레파지토리(https://github.com/facebook/react/issues)의 이슈 목록과 상세 내용을 확인하는 웹 사이트 구축하기
 
 ---
 
