@@ -7,10 +7,19 @@ interface Props {
   author?: string;
   date?: string;
   comments?: number;
+  handleClickIssue?: any;
 }
 
 export default function IssueInfo(props: Props) {
-  const { type = 'list', issueNumber, date, title, author, comments } = props;
+  const {
+    type = 'list',
+    issueNumber,
+    date,
+    title,
+    author,
+    comments,
+    handleClickIssue,
+  } = props;
 
   const formatDate = () => {
     if (typeof date !== 'string') return;
@@ -19,7 +28,7 @@ export default function IssueInfo(props: Props) {
   };
 
   return (
-    <Wrapper type={type}>
+    <Wrapper type={type} onClick={() => handleClickIssue(issueNumber)}>
       <div>
         <Title>
           #{issueNumber} {title}

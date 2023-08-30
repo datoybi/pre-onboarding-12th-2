@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import IssueInfo from '../../components/IssueInfo';
+import Advertisement from '../../components/AdvertisementItem';
 import { useNavigate } from 'react-router-dom';
 import useInfinityScroll from '../../hooks/useInfinityScroll';
 import { IssueContext } from '../../contexts/IssueContext';
@@ -20,16 +21,20 @@ export default function IssueListPage() {
     navigate(`/issues/${issueNumber}`);
   };
 
+  const hasAdvertisement = (idx: number) => (idx + 1) % 5 === 0;
+
   const issueElements = issues.map(
-    ({ id, number, comments, title, user, updated_at }) => (
-      <li key={id} onClick={() => handleClickIssue(number)}>
+    ({ id, number, comments, title, user, updated_at }, issueIdx) => (
+      <li key={id}>
         <IssueInfo
           issueNumber={number}
           comments={comments}
           title={title}
           date={updated_at}
           author={user.login}
+          handleClickIssue={handleClickIssue}
         />
+        {hasAdvertisement(issueIdx) && <Advertisement />}
       </li>
     )
   );
