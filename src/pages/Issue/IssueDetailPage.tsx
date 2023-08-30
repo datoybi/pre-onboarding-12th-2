@@ -4,10 +4,11 @@ import IssueInfo from '../../components/IssueInfo';
 import { useParams } from 'react-router-dom';
 import { getIssue } from '../../apis/remotes';
 import IssueContent from '../../components/IssueContent';
+import { Issue } from '../../types/Issue';
 
 export default function IssueDetail() {
-  const [issue, setIssue] = useState({}) as any;
-  const { id: issueId }: any = useParams();
+  const [issue, setIssue] = useState<Issue>();
+  const { id: issueId } = useParams() as { id: string };
 
   useEffect(() => {
     const fetchIssue = async () => {
@@ -19,19 +20,17 @@ export default function IssueDetail() {
   return (
     <>
       <Title>
-        <img src={issue?.user?.avatar_url} alt={issue.title} />
+        <img src={issue?.user?.avatar_url} alt={issue?.title} />
         <IssueInfo
           type="detail"
-          issueId={issue?.id}
           issueNumber={issue?.number}
-          content={issue?.body}
           comments={issue?.comments}
           title={issue?.title}
           date={issue?.updated_at}
           author={issue?.user?.login}
         />
       </Title>
-      <IssueContent content={issue?.body} />
+      <IssueContent content={issue?.body || ''} />
     </>
   );
 }

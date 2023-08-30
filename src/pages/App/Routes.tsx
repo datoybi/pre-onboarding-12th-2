@@ -8,7 +8,7 @@ export const Routes = () => {
     <ReactRouterRoutes>
       <Route path="/" element={<IssueListPage />} />
       <Route path="/issues" element={<IssueListPage />} />
-      <Route path="/issue/:id" element={<IssueDetailPage />} />
+      <Route path="/issues/:id" element={<IssueDetailPage />} />
       <Route path="*" element={<IssueListPage />} />
     </ReactRouterRoutes>
   );

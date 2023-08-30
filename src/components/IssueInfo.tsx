@@ -1,24 +1,34 @@
 import { styled } from 'styled-components';
-// import { ReactNode } from 'react';
-// TODO: type:  list, detail
 
-export default function IssueInfo(props: any) {
-  const { type = 'list', children, ...rest } = props;
+type Props = {
+  type?: 'list' | 'detail';
+  issueNumber?: number;
+  title?: string;
+  author?: string;
+  date?: string;
+  comments?: number;
+};
+
+export default function IssueInfo(props: Props) {
+  const { type = 'list', issueNumber, date, title, author, comments } = props;
+
   const formatDate = () => {
-    const dateObj = new Date(props.date);
+    if (typeof date !== 'string') return;
+    const dateObj = new Date(date);
     return `${dateObj.getFullYear()}월 ${dateObj.getMonth()}월 ${dateObj.getDate()}일`;
   };
+
   return (
     <Wrapper type={type}>
       <div>
         <Title>
-          #{props.issueNumber} {props.title}
+          #{issueNumber} {title}
         </Title>
         <SubTitle>
-          작성자: {props.author}, 작성일: {formatDate()}
+          작성자: {author}, 작성일: {formatDate()}
         </SubTitle>
       </div>
-      <Comment>코멘트: {props.comments}</Comment>
+      <Comment>코멘트: {comments}</Comment>
     </Wrapper>
   );
 }
