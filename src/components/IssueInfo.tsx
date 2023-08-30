@@ -1,13 +1,13 @@
 import { styled } from 'styled-components';
 
-type Props = {
+interface Props {
   type?: 'list' | 'detail';
   issueNumber?: number;
   title?: string;
   author?: string;
   date?: string;
   comments?: number;
-};
+}
 
 export default function IssueInfo(props: Props) {
   const { type = 'list', issueNumber, date, title, author, comments } = props;

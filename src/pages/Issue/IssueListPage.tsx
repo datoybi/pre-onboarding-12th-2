@@ -1,29 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import IssueInfo from '../../components/IssueInfo';
-import { getIssues } from '../../apis/remotes';
 import { useNavigate } from 'react-router-dom';
-import { Issues } from '../../types/Issue';
+import useInfinityScroll from '../../hooks/useInfinityScroll';
+import { IssueContext } from '../../contexts/IssueContext';
+import { styled } from 'styled-components';
 
 export default function IssueListPage() {
   const navigate = useNavigate();
-  const [issues, setIssues] = useState<Issues>([]);
-  console.log('render?');
-  console.log(issues);
+  const { issues, fetchIssues, isLoading, isError } = useContext(IssueContext);
+  const observeRef = useInfinityScroll({ callback: getIssues });
 
-  useEffect(() => {
-    const fetchIssues = async () => {
-      setIssues(await getIssues(1));
-    };
-    fetchIssues();
-  }, []);
+  function getIssues() {
+    if (!isLoading) {
+      fetchIssues();
+    }
+  }
 
-  const handleClickItem = (issueNumber: number) => {
+  const handleClickIssue = (issueNumber: number) => {
     navigate(`/issues/${issueNumber}`);
   };
 
   const issueElements = issues.map(
     ({ id, number, comments, title, user, updated_at }) => (
-      <li key={id} onClick={() => handleClickItem(number)}>
+      <li key={id} onClick={() => handleClickIssue(number)}>
         <IssueInfo
           issueNumber={number}
           comments={comments}
@@ -34,5 +33,16 @@ export default function IssueListPage() {
       </li>
     )
   );
-  return <ul>{issueElements}</ul>;
+
+  return (
+    <ul>
+      {issueElements}
+      {isLoading && <>loading...</>}
+      {isError ? <>error</> : <ObserveRef ref={observeRef} />}
+    </ul>
+  );
 }
+
+const ObserveRef = styled.li`
+  height: 20px;
+`;
