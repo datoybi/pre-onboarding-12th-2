@@ -1,4 +1,4 @@
-import Axios, { AxiosRequestConfig } from 'axios';
+import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ORGANIZATION, REPO } from '../utils/constants';
 
 const baseURL = `https://api.github.com/repos/${ORGANIZATION}/${REPO}`;
@@ -12,14 +12,22 @@ const axios = Axios.create({
   },
 });
 
+axios.interceptors.response.use(
+  response => {
+    return response.data;
+  },
+  (error: AxiosError) => {
+    if (error.response && error.response.status > 200) {
+      throw error;
+    }
+  }
+);
+
 export const http = {
   get: function get<Response = unknown>(
     url: string,
     config?: AxiosRequestConfig
-  ) {
-    return axios
-      .get<Response>(url, config)
-      .then(res => res.data)
-      .catch(e => e.response.data);
+  ): Promise<AxiosResponse<Response>> {
+    return axios.get<Response>(url, config);
   },
 };
