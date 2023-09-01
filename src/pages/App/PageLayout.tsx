@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import Header from '../../components/UI/Header';
-import Container from '../../components/UI/Container';
+import { Header, Container } from '../../components/UI';
 
 export function PageLayout({ children }: { children: ReactNode }) {
   return (

@@ -1,11 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
-interface Props {
-  content: string;
-}
-
-export default function IssueContent({ content }: Props) {
+export default function IssueContent({ content }: { content: string }) {
   return (
     <MarkdownRenderer>
       <ReactMarkdown>{content}</ReactMarkdown>
