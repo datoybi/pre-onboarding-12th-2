@@ -1,8 +1,16 @@
 # 프리온보딩 2주차 개인 과제 - 윤다솜
 
-특정 깃헙 레파지토리(https://github.com/facebook/react/issues)의 이슈 목록과 상세 내용을 확인하는 웹 사이트 구축하기
+특정 깃헙 레파지토리 (https://github.com/facebook/react/issues) 의 이슈 목록과 상세 내용을 확인하는 웹 사이트 구축하기
 
----
+<br/>
+<br/>
+
+# 배포
+
+https://pre-onboarding-12th-2-iota.vercel.app/
+
+<br/>
+<br/>
 
 # 신경쓴 점
 
@@ -10,6 +18,7 @@
 
 - context api를 사용하여 전역 state 관리하였습니다.
 - useIssue, useIssues를 사용하여 API 호출과 관련된 custom hook을 만들어 컴포넌트 UI와 `관심사의 분리`를 하였습니다. 해당 custom hook은 api 호출과 api호출로 가져온 데이터를 context안의 state로써 세팅합니다.
+  <br/>
 
 src/contexts/IssueContext.tsx
 
@@ -32,6 +41,8 @@ export function IssueContextProvider({ children }: { children: ReactNode }) {
   );
 }
 ```
+
+<br/>
 
 src/hooks/useIssues.ts
 
@@ -68,6 +79,9 @@ const useIssues = () => {
 export default useIssues;
 ```
 
+<br/>
+<br/>
+
 ---
 
 ## 2. 에러 핸들링
@@ -75,6 +89,7 @@ export default useIssues;
 ### 없는 페이지에 접근할 때
 
 ![not found](./public/assets/not_found.gif)
+<br/>
 
 ### API 응답에서 에러가 날 때
 
@@ -82,11 +97,15 @@ export default useIssues;
 
 ---
 
+<br/>
+<br/>
+
 ## 3. 중복되는 컴포넌트를 공통 컴포넌트로 구현
 
 중복되는 컴포넌트를 하나의 합성 컴포넌트로 구현하여 재사용성을 높임
 
 ![공통 컴포넌트](./public/assets/componsed_component.png)
+<br/>
 
 /src/components/Issue/IssueInfo
 
