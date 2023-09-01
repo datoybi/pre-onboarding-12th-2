@@ -20,7 +20,7 @@ const useInfinityScroll = ({
     ...option,
   };
 
-  const sendRequest = (entries: IntersectionObserverEntry[]) => {
+  const sendCallback = (entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
     if (target.isIntersecting) {
       callback();
@@ -28,12 +28,12 @@ const useInfinityScroll = ({
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(sendRequest, options);
+    const observer = new IntersectionObserver(sendCallback, options);
     if (observeRef.current) observer.observe(observeRef.current);
     return () => {
       observer.disconnect();
     };
-  }, [sendRequest]);
+  }, [sendCallback]);
 
   return observeRef;
 };

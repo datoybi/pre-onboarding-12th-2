@@ -1,30 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { styled } from 'styled-components';
-import IssueInfo from '../../components/Issue/IssueInfo';
 import { useParams } from 'react-router-dom';
-import { getIssue } from '../../apis/remotes';
+
+import { IssueContext } from '../../contexts/IssueContext';
+import useIssue from '../../hooks/useIssue';
+import IssueInfo from '../../components/Issue/IssueInfo';
 import IssueContent from '../../components/Issue/IssueContent';
-import { Issue } from '../../types/Issue';
-import Loading from '../../components/UI/Loading';
+import { Error, Loading } from '../../components/UI';
 
 export default function IssueDetail() {
-  const [issue, setIssue] = useState<Issue>();
+  const { issue } = useContext(IssueContext);
   const { id: issueId } = useParams() as { id: string };
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { fetchIssue, isLoading, error } = useIssue();
 
   useEffect(() => {
-    const fetchIssue = async () => {
-      setIssue(await getIssue(issueId));
-      setIsLoading(false);
-    };
-    fetchIssue();
+    fetchIssue(issueId);
   }, [issueId]);
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
+      {isLoading && <Loading />}
+      {error && <Error />}
+      {issue && !isLoading && !error && (
         <>
           <IssueTitle>
             <img src={issue?.user?.avatar_url} alt={issue?.title} />
